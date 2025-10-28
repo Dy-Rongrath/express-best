@@ -6,9 +6,9 @@
     "removeComments": true,
     "sourceMap": true,
     /* ===== Language ===== */
-    "target": "ES2022", // modern Node.js features
-    "module": "NodeNext", // Set to NodeNext to match moduleResolution
-    "moduleResolution": "NodeNext", // needed for ESM imports
+  "target": "ES2022", // modern Node.js features
+  "module": "NodeNext", // Use NodeNext for ESM
+  "moduleResolution": "NodeNext", // Use NodeNext for ESM
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true, // simplifies import syntax
     "resolveJsonModule": true,
