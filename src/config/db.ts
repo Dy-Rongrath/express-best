@@ -6,13 +6,19 @@ let isConnected = false;
 
 export async function connectDB(uri = env.MONGODB_URI) {
   if (isConnected) return;
+
+  const connectionUri = uri || (env.NODE_ENV === 'test'
+    ? 'mongodb://localhost:27017/test' // fallback for tests
+    : (() => { throw new Error('MONGODB_URI is required in non-test environments'); })()
+  );
+
   mongoose.set("strictQuery", true);
 
-  await mongoose.connect(uri, {
+  await mongoose.connect(connectionUri, {
     autoIndex: env.NODE_ENV !== "production",
     serverSelectionTimeoutMS: 7000,
     maxPoolSize: 10,
-  } as any);
+  });
 
   isConnected = true;
   mongoose.connection.on("error", (err) => logger.error({ err }, "Mongo connection error"));
