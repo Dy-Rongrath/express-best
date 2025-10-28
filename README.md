@@ -66,18 +66,20 @@ npm run db:migrations
 
 ### Manual Scripts
 
-You can also run scripts directly with tsx:
+You can also run scripts directly with Node.js:
 
 ```bash
-# Seed database
-tsx src/scripts/seed.ts seed
-
-# Clear database
-tsx src/scripts/seed.ts clear
+# Database seeding
+node --import tsx/esm src/scripts/seed.ts seed
+node --import tsx/esm src/scripts/seed.ts clear
+node --import tsx/esm src/scripts/seed.ts reset
 
 # Database status
-tsx src/scripts/db-status.ts status
+node --import tsx/esm src/scripts/db-status.ts status
+node --import tsx/esm src/scripts/db-status.ts collections
 
-# Run migrations
-tsx src/scripts/migrate.ts up
+# Migrations
+node --import tsx/esm src/scripts/migrate.ts up
+node --import tsx/esm src/scripts/migrate.ts down
+node --import tsx/esm src/scripts/migrate.ts list
 ```
