@@ -9,7 +9,15 @@
     "start": "node dist/server.js",
     "test": "vitest --run",
     "lint": "eslint .",
-    "fmt": "prettier -w ."
+    "fmt": "prettier -w .",
+    "db:seed": "tsx src/scripts/seed.ts",
+    "db:clear": "tsx src/scripts/seed.ts clear",
+    "db:reset": "tsx src/scripts/seed.ts reset",
+    "db:status": "tsx src/scripts/db-status.ts status",
+    "db:collections": "tsx src/scripts/db-status.ts collections",
+    "db:migrate": "tsx src/scripts/migrate.ts up",
+    "db:rollback": "tsx src/scripts/migrate.ts down",
+    "db:migrations": "tsx src/scripts/migrate.ts list"
   },
   "keywords": [],
   "author": "",
