@@ -14,8 +14,23 @@ export const userRepo = {
       UserModel.countDocuments()
     ]);
     return {
-      items: items.map((i: any) => ({ ...i, id: i.id ?? i._id?.toString() })),
+      items: items.map((i) => ({ ...i, id: i._id?.toString() })),
       page, limit, total, pages: Math.ceil(total / limit)
     };
+  },
+
+  async findById(id: string) {
+    const user = await UserModel.findById(id).lean({ virtuals: true });
+  return user ? { ...user, id: user._id?.toString() } : null;
+  },
+
+  async updateById(id: string, data: Partial<CreateUserInput>) {
+    const user = await UserModel.findByIdAndUpdate(id, data, { new: true, lean: true });
+  return user ? { ...user, id: user._id?.toString() } : null;
+  },
+
+  async deleteById(id: string) {
+    const user = await UserModel.findByIdAndDelete(id, { lean: true });
+  return user ? { ...user, id: user._id?.toString() } : null;
   }
 };
