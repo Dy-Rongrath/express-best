@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    /* ===== Output ===== */
+    "outDir": "dist", // compiled JS output
+    "rootDir": "src", // TS source root
+    "removeComments": true,
+    "sourceMap": true,
+    /* ===== Language ===== */
+    "target": "ES2022", // modern Node.js features
+    "module": "NodeNext", // Set to NodeNext to match moduleResolution
+    "moduleResolution": "NodeNext", // needed for ESM imports
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true, // simplifies import syntax
+    "resolveJsonModule": true,
+    "isolatedModules": true, // ensures per-file transpilation
+    "skipLibCheck": true, // speeds up build
+    /* ===== Type Checking ===== */
+    "strict": true, // enables all strict rules
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    /* ===== Imports ===== */
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": [
+        "*"
+      ] // allows '@/modules/users' style imports
+    }
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts"
+  ]
+}
