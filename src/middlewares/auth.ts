@@ -7,7 +7,7 @@ export function requireAuth(req: Request, _res: Response, next: NextFunction) {
   const token = h.startsWith("Bearer ") ? h.slice(7) : null;
   if (!token) return next(new HttpError(401, "Missing bearer token"));
   try {
-    (req as any).user = verifyAccess(token); // attach user
+    req.user = verifyAccess(token); // attach user
     next();
   } catch {
     next(new HttpError(401, "Invalid token"));

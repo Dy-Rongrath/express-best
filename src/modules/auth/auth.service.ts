@@ -8,8 +8,8 @@ export async function register(name: string, email: string, password: string) {
   try {
     const user = await UserModel.create({ name, email, passwordHash });
     return issueTokens(user.id, user.email, user.name);
-  } catch (e: any) {
-    if (e?.code === 11000) throw new HttpError(409, "Email already exists");
+  } catch (e: unknown) {
+    if ((e as { code?: number })?.code === 11000) throw new HttpError(409, "Email already exists");
     throw e;
   }
 }

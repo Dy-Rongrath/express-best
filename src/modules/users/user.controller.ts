@@ -8,9 +8,9 @@ const create = asyncHandler(async (req: Request, res: Response) => {
   try {
     const created = await userRepo.create(req.body);
     res.status(201).json(created);
-  } catch (e: any) {
-    if (e?.code === 11000) {
-      throw new HttpError(409, "Email already exists", { keyValue: e.keyValue });
+  } catch (e: unknown) {
+    if ((e as { code?: number; keyValue?: unknown })?.code === 11000) {
+      throw new HttpError(409, "Email already exists", { keyValue: (e as { keyValue?: unknown }).keyValue });
     }
     throw e;
   }

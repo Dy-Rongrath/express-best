@@ -8,8 +8,9 @@ export const requestId: RequestHandler = (req, res, next) => {
   next();
 };
 
-declare global {
-  namespace Express {
-    interface Request { id?: string }
+declare module 'express' {
+  interface Request {
+    id?: string | number | object;
+    user?: Record<string, unknown>;
   }
 }
