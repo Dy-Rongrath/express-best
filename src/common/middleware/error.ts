@@ -1,5 +1,5 @@
 import type { ErrorRequestHandler, RequestHandler } from 'express';
-import { ApiError } from '../errors';
+import { ApiError } from '../errors.js';
 
 export const errorConverter: RequestHandler = (req, res, next) => {
   // if the route hit threw a non-ApiError, convert it

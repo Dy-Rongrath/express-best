@@ -2,7 +2,6 @@ import { Router } from 'express';
 import { create, list, get, update, remove } from './user.controller.js';
 import { validate } from '../../common/middleware/validate.js';
 import { createUserSchema, updateUserSchema } from './user.schema.js';
-import { asyncHandler } from '../../common/http.js';
 
 const router = Router();
 
@@ -14,8 +13,8 @@ const router = Router();
  *   post:
  *     summary: Create user
  */
-router.get('/', asyncHandler(list));
-router.post('/', validate(createUserSchema), asyncHandler(create));
+router.get('/', list);
+router.post('/', validate(createUserSchema), create);
 
 /**
  * @swagger
@@ -27,8 +26,8 @@ router.post('/', validate(createUserSchema), asyncHandler(create));
  *   delete:
  *     summary: Delete user
  */
-router.get('/:id', asyncHandler(get));
-router.patch('/:id', validate(updateUserSchema), asyncHandler(update));
-router.delete('/:id', asyncHandler(remove));
+router.get('/:id', get);
+router.patch('/:id', validate(updateUserSchema), update);
+router.delete('/:id', remove);
 
 export default router;

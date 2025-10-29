@@ -1,3 +1,4 @@
+// @ts-expect-error No types for swagger-jsdoc
 import swaggerJsdoc from 'swagger-jsdoc';
 
 export const openapiSpec = swaggerJsdoc({
