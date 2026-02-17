@@ -8,6 +8,7 @@ import { list, create } from "../modules/users/user.controller.js";
 import { RegisterSchema, LoginSchema } from "../modules/auth/auth.types.js";
 import { registerCtrl, loginCtrl, refreshCtrl } from "../modules/auth/auth.controller.js";
 import { requireAuth } from "../middlewares/auth.js";
+import reportRoutes from "../modules/reports/report.route.js";
 
 export const router = Router();
 
@@ -24,6 +25,11 @@ router.post("/auth/register", validate({ body: RegisterSchema }), registerCtrl);
 router.post("/auth/login", validate({ body: LoginSchema }), loginCtrl);
 router.post("/auth/refresh", refreshCtrl);
 
-// Protected examples
-router.get("/users", requireAuth, list);
-router.post("/users", requireAuth, validate({ body: CreateUserSchema }), create);
+// Protected routes from here
+router.use(requireAuth);
+
+router.get("/users", list);
+router.post("/users", validate({ body: CreateUserSchema }), create);
+
+// Reports
+router.use("/reports", reportRoutes);

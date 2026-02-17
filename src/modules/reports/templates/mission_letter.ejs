@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8">
+    <title>លិខិតបញ្ជាបេសកកម្ម</title>
+    <style>
+        /* Import standard Khmer fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Moul&display=swap');
+
+        /* CSS Reset for PDF rendering */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Battambang', sans-serif;
+            font-size: 15px;
+            /* Adjusted to match the visual weight of the original */
+            line-height: 1.7;
+            /* Crucial: prevents Khmer vowels (ស្រៈ) from being cut off */
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Document Headers */
+        .document-title {
+            text-align: center;
+            font-family: 'Moul', cursive;
+            font-size: 17px;
+            margin-top: 10px;
+        }
+
+        .document-subtitle {
+            text-align: center;
+            font-family: 'Moul', cursive;
+            font-size: 17px;
+            margin-bottom: 15px;
+        }
+
+        /* Reference List with Hanging Indents */
+        .reference-list {
+            margin-bottom: 15px;
+            padding-left: 45px;
+            padding-right: 15px;
+            text-align: justify;
+        }
+
+        .reference-list p {
+            margin: 0;
+            padding-left: 15px;
+            text-indent: -15px;
+        }
+
+        .reference-list p.no-dash {
+            text-indent: 0;
+        }
+
+        /* Body Paragraphs */
+        .paragraph {
+            text-indent: 45px;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        /* Member List Table */
+        .members-table {
+            width: 90%;
+            margin: 0 auto 10px auto;
+            border-collapse: collapse;
+        }
+
+        .members-table td {
+            padding: 2px 5px;
+            vertical-align: top;
+        }
+
+        /* Schedule Layout */
+        .schedule-table {
+            margin-left: 45px;
+            margin-bottom: 10px;
+            border-collapse: collapse;
+        }
+
+        .schedule-table td {
+            padding: 0 5px 0 0;
+            vertical-align: top;
+        }
+
+        /* Signature Section */
+        .signature-section {
+            margin-top: 20px;
+            width: 45%;
+            float: right;
+            text-align: center;
+        }
+
+        .signature-date {
+            margin-bottom: 10px;
+        }
+
+        .signature-title {
+            font-family: 'Moul', cursive;
+            font-size: 15px;
+            margin-bottom: 80px;
+            /* Space for the stamp and signature */
+        }
+
+        .signature-name {
+            font-family: 'Moul', cursive;
+            font-size: 16px;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+</head>
+
+<body>
+
+    <% const toKhmerNum=(num)=> {
+        const khmerDigits = ['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩'];
+        return num.toString().split('').map(d => khmerDigits[d] || d).join('');
+        };
+
+        // Ensure members length is padded (e.g., "03") and converted to Khmer ("០៣")
+        const formattedMemberCount = toKhmerNum(members.length.toString().padStart(2, '0'));
+        %>
+
+        <div class="document-title">លិខិតបញ្ជាបេសកកម្ម</div>
+        <div class="document-subtitle">បេឡាជាតិសន្តិសុខសង្គម</div>
+
+        <div class="reference-list">
+            <p>- បានឃើញរដ្ឋធម្មនុញ្ញនៃព្រះរាជាណាចក្រកម្ពុជា</p>
+            <p>- បានឃើញព្រះរាជក្រមលេខ នស/រកម/០១០៥/០០៣ ចុះថ្ងៃទី១៧ ខែមករា ឆ្នាំ២០០៥
+                ដែលប្រកាសឱ្យប្រើច្បាប់ស្តីពីការបង្កើតក្រសួងការងារនិងបណ្តុះបណ្តាលវិជ្ជាជីវៈ</p>
+            <p>- បានឃើញព្រះរាជក្រមលេខ នស/រកម/១១១៩/០១៨ ចុះថ្ងៃទី០២ ខែវិច្ឆិកា ឆ្នាំ២០១៩
+                ដែលប្រកាសឱ្យប្រើច្បាប់ស្តីពីរបបសន្តិសុខសង្គម</p>
+            <p>- បានឃើញព្រះរាជក្រឹត្យលេខ នស/រកត/០៥២០/៥៨២ ចុះថ្ងៃទី៣០ ខែឧសភា ឆ្នាំ២០២០
+                ស្តីពីការបង្កើតបេឡាជាតិសន្តិសុខសង្គម ជាគ្រឹះស្ថានសាធារណៈរដ្ឋបាល</p>
+            <p class="no-dash">យោងអនុក្រឹត្យលេខ១៩៦ អនក្រ.បក ចុះថ្ងៃទី៣០ ខែវិច្ឆិកា ឆ្នាំ២០២០
+                ស្តីពីការរៀបចំនិងការប្រព្រឹត្តទៅរបស់បេឡាជាតិសន្តិសុខសង្គម</p>
+            <p>- យោងតាមការចាំបាច់របស់បេឡាជាតិសន្តិសុខសង្គម</p>
+        </div>
+
+        <div class="paragraph">
+            បេឡាជាតិសន្តិសុខសង្គម សូមចាត់ថ្នាក់ដឹកនាំ មន្ត្រី និងបុគ្គលិកចំនួន <%= formattedMemberCount %>រូប
+                ឱ្យចុះបំពេញបេសកកម្មនៅ <%= missionLocation %> ដែលមានសមាសភាពដូចខាងក្រោម៖
+        </div>
+
+        <table class="members-table">
+            <% members.forEach(function(member, index) { %>
+                <tr>
+                    <td width="30%">
+                        <%= toKhmerNum(index + 1) %>-លោក <%= member.name %>
+                    </td>
+                    <td width="55%">
+                        <%= member.position %>
+                    </td>
+                    <td width="15%">
+                        <%= member.role %>
+                    </td>
+                </tr>
+                <% }); %>
+        </table>
+
+        <table class="schedule-table">
+            <tr>
+                <td style="white-space: nowrap;">កាលបរិច្ឆេទ</td>
+                <td>-</td>
+                <td>ចេញដំណើរ ៖ ថ្ងៃទី <%= departureDate %>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>-</td>
+                <td>ត្រឡប់មកវិញ ៖ ថ្ងៃទី <%= returnDate %>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">មធ្យោបាយធ្វើដំណើរ ៖ <%= transport %>
+                </td>
+            </tr>
+        </table>
+
+        <div class="paragraph">
+            <%= missionPurpose %>
+        </div>
+
+        <div class="paragraph">
+            អាស្រ័យហេតុនេះ សូមអាជ្ញាធរមានសមត្ថកិច្ចពាក់ព័ន្ធជួយសម្រួលដល់ថ្នាក់ដឹកនាំ មន្ត្រី និងបុគ្គលិក
+            ខាងលើនេះឱ្យសម្រេចភារកិច្ចប្រកបដោយជោគជ័យតាមការគួរ។
+        </div>
+
+        <div class="signature-section clearfix">
+            <div class="signature-date">
+                <%= khmerLunarDate %><br>
+                    រាជធានីភ្នំពេញ ថ្ងៃទី <%= signDate %>
+            </div>
+            <div class="signature-title">
+                ប្រតិភូរាជរដ្ឋាភិបាលទទួលបន្ទុកជា<br>
+                អគ្គនាយកបេឡាជាតិសន្តិសុខសង្គម
+            </div>
+            <div class="signature-name">
+                <%= signatoryName %>
+            </div>
+        </div>
+
+</body>
+
+</html>

@@ -3,8 +3,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
+    command: npm run dev:docker
     ports:
-      - "3000:3000"
+      - '3000:3000'
     env_file:
       - .env
     volumes:
@@ -19,9 +20,9 @@ services:
     restart: unless-stopped
 
   mongo:
-    image: mongo:7
+    image: mongo:latest
     ports:
-      - "27017:27017"
+      - '27017:27017'
     volumes:
       - mongo-data:/data/db
 

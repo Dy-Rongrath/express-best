@@ -7,7 +7,17 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install all dependencies (including dev)
+# Install all dependencies (including dev)
 RUN npm ci
+
+# Install Chromium and dependencies for Puppeteer
+RUN apk add --no-cache \
+    chromium \
+    nss \
+    freetype \
+    harfbuzz \
+    ca-certificates \
+    ttf-freefont
 
 # Copy config
 COPY tsconfig.json ./
