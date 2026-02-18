@@ -122,8 +122,8 @@
   <body>
     <% const toKhmerNum=(num)=> { const khmerDigits = ['០', '១', '២', '៣', '៤',
     '៥', '៦', '៧', '៨', '៩']; return num.toString().split('').map(d =>
-    khmerDigits[d] || d).join(''); }; // Ensure members length is padded (e.g.,
-    "03") and converted to Khmer ("០៣") const formattedMemberCount =
+    khmerDigits[d] || d).join(''); }; /* Ensure members length is padded (e.g.,
+    "03") and converted to Khmer ("០៣") */ const formattedMemberCount =
     toKhmerNum(members.length.toString().padStart(2, '0')); %>
 
     <div class="document-title">លិខិតបញ្ជាបេសកកម្ម</div>
