@@ -1,7 +1,9 @@
 import { Router } from "express";
-import { getMissionLetter } from "./report.controller.js";
+import { getMissionLetter, getReportTemplates } from "./report.controller.js";
 
 const router = Router();
+
+router.get("/", getReportTemplates);
 
 /**
  * @swagger

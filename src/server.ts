@@ -8,20 +8,29 @@ const app = createApp();
 async function start() {
   await connectDB();
   const srv = app.listen(env.PORT, () => logger.info(`Server running on :${env.PORT}`));
+  let isStopping = false;
 
-  const stop = async (signal: string) => {
+  const stop = async (signal: string, exitCode: number | null = 0) => {
+    if (isStopping) return;
+    isStopping = true;
+
     logger.info(`Received ${signal}, shutting down...`);
     await disconnectDB();
     srv.close(() => {
       logger.info("HTTP server closed");
-      process.exit(0);
+      if (exitCode === null) {
+        process.kill(process.pid, "SIGUSR2");
+        return;
+      }
+      process.exit(exitCode);
     });
     // Force exit after 10s
     setTimeout(() => process.exit(1), 10_000).unref();
   };
 
-  process.on("SIGINT", () => stop("SIGINT"));
-  process.on("SIGTERM", () => stop("SIGTERM"));
+  process.on("SIGINT", () => void stop("SIGINT"));
+  process.on("SIGTERM", () => void stop("SIGTERM"));
+  process.once("SIGUSR2", () => void stop("SIGUSR2", null));
 }
 
 start().catch((e) => {

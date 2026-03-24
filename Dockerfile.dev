@@ -3,19 +3,21 @@ FROM node:22-alpine
 
 WORKDIR /app
 
+# LibreOffice is in Alpine's community repository and is required for Carbone PDF conversion.
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/v$(cut -d. -f1,2 /etc/alpine-release)/community" >> /etc/apk/repositories
+
 # Copy package files
 COPY package*.json ./
 
 # Install all dependencies (including dev)
 RUN npm ci
 
-# Install Chromium and dependencies for Puppeteer
+# Install runtime packages for Carbone PDF conversion and Mongo healthchecks
 RUN apk add --no-cache \
-    chromium \
-    nss \
-    freetype \
-    harfbuzz \
+    bash \
     ca-certificates \
+    libreoffice \
+    mongodb-tools \
     ttf-freefont
 
 # Copy config

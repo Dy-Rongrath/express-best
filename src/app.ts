@@ -13,7 +13,15 @@ export function createApp() {
   applyAppMiddleware(app);
 
   // Swagger UI
-  app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(getOpenApiDocument()));
+  app.use(
+    "/api/docs",
+    swaggerUi.serve,
+    swaggerUi.setup(getOpenApiDocument(), {
+      swaggerOptions: {
+        persistAuthorization: true,
+      },
+    }),
+  );
   // Root /api endpoint for status
   app.get("/api", async (_req, res) => {
     // Import mongoose dynamically to avoid circular deps
