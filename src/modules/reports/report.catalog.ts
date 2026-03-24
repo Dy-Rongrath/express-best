@@ -10,7 +10,7 @@ export type ReportTemplateKey = "mission-letter";
 export type ReportTemplateDefinition = {
   key: ReportTemplateKey;
   name: string;
-  engine: "ejs" | "carbone";
+  engine: "carbone";
   templatePath: string;
   outputFileName: string;
   mimeType: string;

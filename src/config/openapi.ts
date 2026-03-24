@@ -26,7 +26,7 @@ const RefreshSchema = z.object({
 const ReportTemplateSchema = z.object({
   key: z.string(),
   name: z.string(),
-  engine: z.enum(['ejs', 'carbone']),
+  engine: z.literal('carbone'),
   outputFileName: z.string(),
 }).meta({
   id: 'ReportTemplate',
