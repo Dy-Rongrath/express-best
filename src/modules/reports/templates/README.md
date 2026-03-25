@@ -16,5 +16,5 @@ templates/
 
 Current status in this repo:
 
-- `mission-letter/` is configured for Carbone and expects `template.docx`.
+- `mission-letter/` is configured for Carbone and currently uses `Letter_Head_លិខិតបញ្ជាបេសកកម្ម.docx`.
 - Put one Office template file inside each report folder and keep a `sample-data.json` next to it for easier testing.

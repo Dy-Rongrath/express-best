@@ -3,54 +3,84 @@ import { access } from "node:fs/promises";
 import { getReportTemplate, type ReportTemplateKey } from "./report.catalog.js";
 import { HttpError } from "../../middlewares/error.js";
 
-type MissionMember = {
+// ---------------------------------------------------------------------------
+// Data types
+// ---------------------------------------------------------------------------
+
+type MissionStaff = {
+  no: string;
   name: string;
   position: string;
   role: string;
 };
 
-type MissionLetterData = {
-  missionLocation: string;
-  members: MissionMember[];
-  departureDate: string;
-  returnDate: string;
-  transport: string;
-  missionPurpose: string;
-  khmerLunarDate: string;
-  signDate: string;
-  signatoryName: string;
+type EnterpriseCell = {
+  no: string;
+  name: string;
 };
+
+type EnterpriseRow = {
+  left: EnterpriseCell;
+  right: EnterpriseCell;
+};
+
+type Receiver = {
+  name: string;
+};
+
+type MissionLetterData = {
+  code: string;
+  staffs_count: string;
+  mission_location: string;
+  full_departure_date: string;
+  transportation: string;
+  mission_purpose: string;
+  full_khmer_sign_date: string;
+  full_sign_date: string;
+  staffs: MissionStaff[];
+  enterprise_rows: EnterpriseRow[];
+  receivers: Receiver[];
+};
+
+// ---------------------------------------------------------------------------
+// Sample / builder
+// ---------------------------------------------------------------------------
 
 export function buildMissionLetterData(): MissionLetterData {
   return {
-    missionLocation: "ខេត្តកណ្តាល",
-    members: [
+    code: "០០១/២៦",
+    staffs_count: "២",
+    mission_location: "ខេត្តកំពង់ស្ពឺ",
+    full_departure_date: "ថ្ងៃទី២៥ ខែមីនា ឆ្នាំ២០២៦",
+    transportation: "រថយន្ត",
+    mission_purpose:
+      "ចុះបំពេញបេសកកម្មត្រួតពិនិត្យ និងប្រមូលព័ត៌មានពាក់ព័ន្ធនឹងសហគ្រាស",
+    full_khmer_sign_date: "ថ្ងៃពុធ ៧កើត ខែចេត្រ ឆ្នាំរោង ឆស័ក ព.ស.២៥៦៩",
+    full_sign_date: "ថ្ងៃទី២៥ ខែមីនា ឆ្នាំ២០២៦",
+    staffs: [
+      { no: "១", name: "ម៉េង ហុង", position: "ប្រធានការិយាល័យ", role: "ប្រធានក្រុម" },
+      { no: "២", name: "សុខ ដារ៉ា", position: "មន្ត្រី", role: "សមាជិក" },
+    ],
+    enterprise_rows: [
       {
-        name: "ធីង គីរី",
-        position: "អនុប្រធានការិយាល័យអធិការកិច្ចទី៣",
-        role: "ប្រធានក្រុម",
+        left:  { no: "១", name: "គ្រឹះស្ថាន អេប៊ីស៊ី" },
+        right: { no: "២", name: "សហគ្រាស តារា" },
       },
       {
-        name: "យ៉ន យ៉ាត់",
-        position: "បុគ្គលិកអធិការកិច្ចសន្តិសុខសង្គម",
-        role: "សមាជិក",
-      },
-      {
-        name: "លឹម សាម៉ាក់",
-        position: "អ្នកបើកបរ",
-        role: "សមាជិក",
+        left:  { no: "៣", name: "ក្រុមហ៊ុន សុខា" },
+        right: { no: "៤", name: "ក្រុមហ៊ុន ដារ៉ា" },
       },
     ],
-    departureDate: "២១ ខែ វិច្ឆិកា ឆ្នាំ ២០២៥",
-    returnDate: "២១ ខែ វិច្ឆិកា ឆ្នាំ ២០២៥",
-    transport: "រថយន្តប.ស.ស.",
-    missionPurpose:
-      "ខ្លឹមសារចុះអង្កេតករណីគ្រោះថ្នាក់ចរាចរណ៍លើជនរងគ្រោះឈ្មោះ ហឿន ហៃ (ស្លាប់) និងឈ្មោះ វ៉ង់ ដាណាត់ (ធ្ងន់) ដែលបម្រើការងារនៅសហគ្រាស ខេម ហ្គាមេន ខូអិលធីឌី និងចុះអង្កេតផ្ទាល់ដល់កន្លែងធ្វើការ និងទីតាំងកើតហេតុ ដែលមានទីតាំងស្ថិតនៅខេត្តកណ្តាល។",
-    khmerLunarDate: "ថ្ងៃសុក្រ ១ កើត ខែ មិគសិរ ឆ្នាំម្សាញ់ ឆស័ក ព.ស.២៥៦៩",
-    signDate: "២១ ខែ វិច្ឆិកា ឆ្នាំ២០២៥",
-    signatoryName: "ម៉េង ហុង",
+    receivers: [
+      { name: "ឯកឧត្តម អគ្គនាយក ដើម្បីជ្រាប" },
+      { name: "ឯកសារកាលប្បវត្តិ" },
+    ],
   };
 }
+
+// ---------------------------------------------------------------------------
+// Renderer
+// ---------------------------------------------------------------------------
 
 export async function renderCarboneReport(
   key: ReportTemplateKey,
@@ -59,7 +89,9 @@ export async function renderCarboneReport(
   const template = getReportTemplate(key);
 
   if (template.engine !== "carbone") {
-    throw new Error(`Report template "${key}" is not configured for Carbone rendering`);
+    throw new Error(
+      `Report template "${key}" is not configured for Carbone rendering`,
+    );
   }
 
   try {

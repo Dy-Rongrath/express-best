@@ -21,7 +21,11 @@ export const reportTemplates: Record<ReportTemplateKey, ReportTemplateDefinition
     key: "mission-letter",
     name: "Mission Letter",
     engine: "carbone",
-    templatePath: path.join(templatesRoot, "mission-letter", "template.docx"),
+    templatePath: path.join(
+      templatesRoot,
+      "mission-letter",
+      "template.docx",
+    ),
     outputFileName: "mission_letter.pdf",
     mimeType: "application/pdf",
   },

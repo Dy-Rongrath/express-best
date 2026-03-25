@@ -31,7 +31,7 @@ export default [
       ...js.configs.recommended.rules,
       ...tseslint.configs.recommended.rules,
       "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-      "@typescript-eslint/no-explicit-any": "warn", // Change to warn instead of error
+      "@typescript-eslint/no-explicit-any": "warn",
       // Disable strict import ordering for now
       "import/order": "off"
     }

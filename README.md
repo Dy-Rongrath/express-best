@@ -22,6 +22,13 @@
   docker compose -f docker-compose.dev.yml up --build
   ```
 
+If you change Docker dependencies such as LibreOffice or fonts, rebuild the API image explicitly:
+
+```bash
+docker compose -f docker-compose.dev.yml build --no-cache api
+docker compose -f docker-compose.dev.yml up
+```
+
 3. Visit:
   - API root: [http://localhost:3000/api](http://localhost:3000/api)
   - Health check: [http://localhost:3000/api/health](http://localhost:3000/api/health)
@@ -46,6 +53,8 @@ docker compose -f docker-compose.prod.yml up --build
 ```
 
 This will build and run the optimized production image.
+
+Both Docker images include LibreOffice so Carbone can convert Office templates to PDF.
 
 ## Environment Variables
 
